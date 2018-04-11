@@ -1,3 +1,4 @@
+/*
 {
    "compilerOptions": {
       "lib": [
@@ -12,4 +13,23 @@
       "experimentalDecorators": true,
       "sourceMap": true
    }
+}*/
+{
+   "compilerOptions": {
+      "target": "es5",
+      "lib": [
+         "es2016",
+         "dom"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "sourceMap": false,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "removeComments": true,
+      "noImplicitAny": false
+   },
+   "exclude": [
+      "node_modules"
+   ]
 }

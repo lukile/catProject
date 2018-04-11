@@ -1,17 +1,44 @@
 import 'reflect-metadata';
-import {createConnection} from 'typeorm';
+import { createConnection } from 'typeorm';
 import {Cat} from './entity/cat.entity';
 import {Menu} from '../menu/menu';
 import {Catfood} from './entity/catfood.entity';
 import {Owner} from './entity/owner.entity';
 
+
+import * as hapi from 'hapi';
+import {ApplicationModule} from './app.module';
+import {NestFactory} from '@nestjs/core';
+
+const http = require('http');
+
+const server: hapi.Server = new hapi.Server();
+
+async function bootstrap() {
+    console.log('YOUPI CONNARD');
+    const app = await NestFactory.create(ApplicationModule, server);
+    await app.init();
+
+    http.createServer(server).listen(3000);
+
+    /*const app: INestApplication = await NestFactory.create(ApplicationModule);
+    app.use(json());
+    await app.listen(3000);*/
+}
+
+bootstrap();
+
+
 createConnection().then(async connection => {
-    /*const menu = new Menu();
+    /*
 
-    menu.main();
+        const menu = new Menu();
 
-    console.log('Getting cat from database');
-    await connection.manager.find();*/
+        menu.main();
+    */
+
+    /*console.log('Getting cat from database');
+    await connection.manager.find();
 
     //List cats from db
     console.log('Load cats from db');
@@ -58,9 +85,9 @@ createConnection().then(async connection => {
     //Update cat in db
     console.log('Please enter cat\'s id you want to update');
     //Ask user cat id
-    prompt.get(['id'], (err, result) => {
+    prompt.get(['id', 'name', 'age', 'breed'], (err, result) => {
         const catId = result.id;
-        await connection.manager.updateById(catId);
+        await connection.manager.updateById(Cat, catId);
     });
 
 
@@ -74,5 +101,5 @@ createConnection().then(async connection => {
     console.log('Saved a new cat with id : ' + cat.id);
     console.log('Loading cats from the db...');
     const cats = await connection.manager.find(Cat);
-    console.log('Loaded cats: ', cats);
+    console.log('Loaded cats: ', cats);*/
 }).catch(error => console.log(error));

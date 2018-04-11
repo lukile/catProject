@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, Post, Param, Patch } from '@nestjs/common
 import { CatfoodService } from '../service/catfood.service';
 import { Catfood } from '../entity/catfood.entity';
 
-/*All methods call service methods according to request type*/
+    /*All methods call service methods according to request type*/
 
 @Controller('/catfood')
 export class CatfoodController {
