@@ -2,9 +2,14 @@ import { Module } from '@nestjs/common';
 import { CatfoodService } from '../service/catfood.service';
 import { Connection } from 'typeorm';
 import { Catfood } from '../entity/catfood.entity';
+import {CatfoodController} from '../controller/catfood.controller';
+import {TypeOrmModule} from '@nestjs/typeorm';
 
 @Module({
-    components: [
+    imports: [TypeOrmModule.forFeature([Catfood])],
+    components: [CatfoodService],
+    controllers: [CatfoodController],
+    /*components: [
         {
             provide: 'CatfoodRepositoryToken',
             useFactory: (connection: Connection) => connection.getRepository(Catfood),
@@ -14,6 +19,6 @@ import { Catfood } from '../entity/catfood.entity';
     ],
     exports: [
         CatfoodService,
-    ],
+    ],*/
 })
 export class CatfoodModule {}

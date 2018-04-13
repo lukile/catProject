@@ -2,9 +2,17 @@ import { Module } from '@nestjs/common';
 import { OwnerService } from '../service/owner.service';
 import { Connection } from 'typeorm';
 import { Owner } from '../entity/owner.entity';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {Catfood} from '../entity/catfood.entity';
+import {CatfoodService} from '../service/catfood.service';
+import {CatfoodController} from '../controller/catfood.controller';
+import {OwnerController} from '../controller/owner.controller';
 
 @Module({
-    components: [
+    imports: [TypeOrmModule.forFeature([Owner])],
+    components: [OwnerService],
+    controllers: [OwnerController],
+    /*components: [
         {
             provide: 'OwnerRepositoryToken',
             useFactory: (connection: Connection) => connection.getRepository(Owner),
@@ -14,6 +22,6 @@ import { Owner } from '../entity/owner.entity';
     ],
     exports: [
         OwnerService,
-    ],
+    ],*/
 })
 export class OwnerModule {}

@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { DatabaseModule } from './database/database.module';
+
 import { MainController } from './controller/main.controller';
 
 import { CatsModule } from './cats.module';
@@ -9,18 +11,18 @@ import { OwnerController } from './controller/owner.controller';
 
 import {CatfoodController} from './controller/catfood.controller';
 import { CatfoodModule } from './catfood.module';
+import {TypeOrmModule} from '@nestjs/typeorm';
 
-import { DatabaseModule } from './database/database.module';
 
 @Module({
-  controllers: [
+    /*controllers: [
       MainController,
       CatsController,
       CatfoodController,
       OwnerController,
-  ],
-    modules: [
-        DatabaseModule,
+  ],*/
+    imports: [
+        TypeOrmModule.forRoot(),
         CatsModule,
         CatfoodModule,
         OwnerModule,

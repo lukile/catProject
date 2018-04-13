@@ -1,10 +1,11 @@
 import { Component, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Cat } from '../entity/cat.entity';
+import {InjectRepository} from '@nestjs/typeorm';
 
 @Component()
 export class CatsService {
-    constructor(@Inject('CatRepositoryToken') private readonly catRepository: Repository<Cat>) {}
+    constructor(@InjectRepository(Cat) private readonly catRepository: Repository<Cat>) {}
 
     async findAll() {
         try {
