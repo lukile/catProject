@@ -1,13 +1,24 @@
 import { Component, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Cat } from '../entity/cat.entity';
+import { Cat } from './cat.entity';
 import {InjectRepository} from '@nestjs/typeorm';
 
 @Component()
 export class CatsService {
+/*
     constructor(@InjectRepository(Cat) private readonly catRepository: Repository<Cat>) {}
+*/
 
-    async findAll() {
+    private readonly cats: Cat[] = [];
+
+    create(cat: Cat) {
+        this.cats.push(cat);
+    }
+
+    findOne(id: number): Cat {
+        return this.cats[id];
+    }
+    /*async findAll(): Promise<Cat[]> {
         try {
             return await this.catRepository.find();
         } catch (err) {
@@ -15,7 +26,7 @@ export class CatsService {
         }
     }
 
-    async findOne(id: number) {
+    async findOne(id: number): Promise<Cat>{
         try {
             return await this.catRepository.findOneById(id);
         } catch (err) {
@@ -23,7 +34,7 @@ export class CatsService {
         }
     }
 
-    async update(id: number, catData: Partial<Cat>) {
+    async update(id: number, catData: Partial<Cat>): Promise<Cat> {
         try {
             await this.catRepository.updateById(id, catData);
             return this.catRepository.findOneById(id);
@@ -32,7 +43,7 @@ export class CatsService {
         }
     }
 
-    async create(cat: Cat) {
+    async create(cat: Cat): Promise<Cat> {
         try {
             return await this.catRepository.save(cat);
         } catch (err) {
@@ -46,5 +57,5 @@ export class CatsService {
         } catch (err) {
             return { err };
         }
-    }
+    }*/
 }

@@ -1,14 +1,30 @@
 import { Body, Controller, Delete, Get, Post, Param, Patch } from '@nestjs/common';
-import { CatsService } from '../service/cats.service';
-import { Cat } from '../entity/cat.entity';
+import { CatsService } from './cats.service';
+import { Cat } from './cat.entity';
+import {ApiOperation, ApiResponse} from '@nestjs/swagger';
 
 /*All methods call service methods according to request type*/
 
 @Controller('/cats')
 export class CatsController {
-    constructor(private catsService: CatsService) {}
+    constructor(private readonly catsService: CatsService) {}
 
-    @Get()
+    @Post()
+    @ApiOperation({ title: 'Create cat' })
+    @ApiResponse({
+        status: 201,
+        description: 'The record has been successfully created.',
+    })
+    @ApiResponse({ status: 403, description: 'Forbidden.' })
+    async create(@Body() cat: Cat) {
+        this.catsService.create(cat);
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string): Cat {
+        return this.catsService.findOne(+id);
+    }
+    /*@Get()
     async findAll() {
         return await this.catsService.findAll();
     }
@@ -33,5 +49,5 @@ export class CatsController {
     async destroy(@Param('id') id: string) {
         await this.catsService.destroy(+id);
         return;
-    }
+    }*/
 }
