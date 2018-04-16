@@ -7,18 +7,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Catfood])],
-    components: [CatfoodService],
     controllers: [CatfoodController],
-    /*components: [
-        {
-            provide: 'CatfoodRepositoryToken',
-            useFactory: (connection: Connection) => connection.getRepository(Catfood),
-            inject: ['DbConnectionToken'],
-        },
-        CatfoodService,
-    ],
-    exports: [
-        CatfoodService,
-    ],*/
+    components: [CatfoodService],
 })
 export class CatfoodModule {}

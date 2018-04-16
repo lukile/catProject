@@ -10,25 +10,15 @@ import { OwnerModule } from './owner.module';
 import { OwnerController } from './controller/owner.controller';
 
 import {CatfoodController} from './controller/catfood.controller';
-import { CatfoodModule } from './catfood.module';
+import { CatfoodModule } from './module/catfood.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {Connection} from 'typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'postgres',
-            password: 'root',
-            database: 'postgres',
-            entities: [__dirname + '/../**/**.entity{.ts,.js}'
-            ],
-            synchronize: true
-        }),
+    imports: [TypeOrmModule.forRoot(),
         CatsModule,
-     /*   CatfoodModule,
-        OwnerModule,*/
+        CatfoodModule,
+       /* OwnerModule,*/
     ],
 })
 

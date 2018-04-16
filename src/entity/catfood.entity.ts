@@ -15,4 +15,7 @@ export class Catfood {
 
     @Column()
     price: number;
+
+    @Column()
+    weight: string;
 }

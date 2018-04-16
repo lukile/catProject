@@ -4,16 +4,16 @@ import { Catfood } from '../entity/catfood.entity';
 
     /*All methods call service methods according to request type*/
 
-@Controller('/catfood')
+@Controller('catfood')
 export class CatfoodController {
     constructor(private readonly catfoodService: CatfoodService) {}
 
     @Get()
-    async findAll() {
+    async findAll(): Promise<Catfood[]> {
         return await this.catfoodService.findAll();
     }
 
-    @Get('/:id')
+    @Get(':id')
     async findOne(@Param('id') id: string) {
         return await this.catfoodService.findOne(+id);
     }
@@ -24,12 +24,12 @@ export class CatfoodController {
         return { catfood: createdCatfood };
     }
 
-    @Patch('/:id')
+    @Patch(':id')
     async update(@Param('id') id: string, @Body() catfood: Partial<Catfood>) {
         return await this.catfoodService.update(+id, catfood);
     }
 
-    @Delete('/:id')
+    @Delete(':id')
     async destroy(@Param('id') id: string) {
         await this.catfoodService.destroy(+id);
         return;

@@ -1,50 +1,33 @@
 import { Component, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Catfood } from '../entity/catfood.entity';
+import {InjectRepository} from '@nestjs/typeorm';
 
 @Component()
 export class CatfoodService {
-    constructor(@Inject('CatfoodRepositoryToken') private readonly catfoodRepository: Repository<Catfood>) {}
+    constructor(
+        @InjectRepository(Catfood)
+        private readonly catfoodRepository: Repository<Catfood>
+    ) {}
 
-    async findAll() {
-        try {
-            return await this.catfoodRepository.find();
-        } catch (err) {
-            return { err };
-        }
+    async findAll(): Promise<Catfood[]> {
+        return await this.catfoodRepository.find();
     }
 
     async findOne(id: number) {
-        try {
-            return await this.catfoodRepository.findOneById(id);
-        } catch (err) {
-            return { err };
-        }
-    }
-
-    async update(id: number, catfoodData: Partial<Catfood>) {
-        try {
-            await this.catfoodRepository.updateById(id, catfoodData);
-            return this.catfoodRepository.findOneById(id);
-        } catch (err) {
-            return { err };
-        }
+        return await this.catfoodRepository.findOneById(id);
     }
 
     async create(catfood: Catfood) {
-        try {
-            return await this.catfoodRepository.save(catfood);
-        } catch (err) {
-            return { err };
-        }
+        return await this.catfoodRepository.save(catfood);
+    }
+
+    async update(id: number, catfoodData: Partial<Catfood>) {
+        await this.catfoodRepository.updateById(id, catfoodData);
+        return this.catfoodRepository.findOneById(id);
     }
 
     async destroy(id: number) {
-        try {
-            return await this.catfoodRepository.deleteById(id);
-        } catch (err) {
-            return { err };
-        }
+        return await this.catfoodRepository.deleteById(id);
     }
-
 }
