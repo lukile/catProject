@@ -1,25 +1,12 @@
 import {Module} from '@nestjs/common';
-import {CatsService} from './cats.service';
-import {Cat} from './cat.entity';
+import {CatsService} from '../service/cats.service';
+import {Cat} from '../entity/cat.entity';
 import {TypeOrmModule} from '@nestjs/typeorm';
-import {CatsController} from './cats.controller';
+import {CatsController} from '../controller/cats.controller';
 
 @Module({
+    imports: [TypeOrmModule.forFeature([Cat])],
     controllers: [CatsController],
-    /*
-        imports: [TypeOrmModule.forFeature([Cat])],
-    */
     components: [CatsService],
-    /*components: [
-        {
-            provide: 'CatRepositoryToken',
-            useFactory: (connection: Connection) => connection.getRepository(Cat),
-            inject: ['DbConnectionToken'],
-        },
-        CatsService,
-    ],
-    exports: [
-        CatsService,
-    ],*/
 })
 export class CatsModule {}

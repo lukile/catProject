@@ -11,7 +11,7 @@ export const databaseProviders = [
             database: 'postgres',
             synchronize: true,
             logging: false,
-            entities: [
+              entities: [
                  'src/entity/**/*.ts',
             ],
         }),

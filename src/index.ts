@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import {Cat} from './module/cat.entity';
+import {Cat} from './entity/cat.entity';
 import {Menu} from '../menu/menu';
 import {Catfood} from './entity/catfood.entity';
 import {Owner} from './entity/owner.entity';
