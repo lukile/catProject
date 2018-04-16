@@ -4,16 +4,16 @@ import { Owner } from '../entity/owner.entity';
 
 /*All methods call service methods according to request type*/
 
-@Controller('/owner')
+@Controller('owner')
 export class OwnerController {
     constructor(private readonly ownerService: OwnerService){}
 
     @Get()
-    async findAll() {
+    async findAll(): Promise<Owner[]> {
         return this.ownerService.findAll();
     }
 
-    @Get('/:id')
+    @Get(':id')
     async findOne(@Param('id') id: string) {
         return await this.ownerService.findOne(+id);
     }
@@ -24,15 +24,14 @@ export class OwnerController {
         return { owner: createdOwner };
     }
 
-    @Patch(':/id')
+    @Patch(':id')
     async update(@Param('id') id: string, @Body() owner: Partial<Owner>) {
         return await this.ownerService.update(+id, owner);
     }
 
-    @Delete('/:id')
+    @Delete(':id')
     async destroy(@Param('id') id: string) {
         await this.ownerService.destroy(+id);
         return;
     }
-
 }
