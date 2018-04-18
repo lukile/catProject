@@ -1,5 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
 import {Owner} from './owner.entity';
+import {CatToy} from './catToy.entity';
 
 /*That's represent each table and column inserted on database */
 
@@ -23,4 +24,7 @@ export class Cat {
     @ManyToOne(type => Owner)
     @JoinColumn({name: 'ownerId'})
     owner: Owner;
+
+    @OneToMany(type => CatToy, catToy => catToy.cat)
+    catToys: CatToy[];
 }

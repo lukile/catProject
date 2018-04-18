@@ -22,29 +22,10 @@ export class CatsService {
     }
 
     async create(cat: Cat) {
-        const ownerRepository = getRepository(Owner);
-        const owner = await ownerRepository.find();
+        //Recuper l'ensemble des owner
+        //affecter le owner.id au cat.owner
 
-
-        //console.log('owner id  : ' + owner.keys());
-      //  console.log('cat id : ' + cat.id);
-       // cat.owner = owner;
-        //cat.owner = owner;
-
-
-//
-
-        /*const ownerId = ownerService.findOne(cat.ownerId);
-
-
-       console.log('ownerId  second : ', ownerId);*/
-
-        /*const owner = new Owner();
-        cat.owner = owner;
-        console.log('owner cat : ' + cat.owner.id);
-        console.log('owner id : ' + owner.);
-        */
-        await this.catRepository.save(cat);
+        return await this.catRepository.save(cat);
     }
 
     async update(id: number, catData: Partial<Cat>): Promise<Cat> {

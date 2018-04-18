@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {Cat} from './cat.entity';
 
 /*That's represent each table and column inserted on database */
 
@@ -15,4 +16,11 @@ export class CatToy {
 
     @Column()
     price: number;
+
+    @Column({nullable: true})
+    catId: number;
+
+    @ManyToOne(type => Cat)
+    @JoinColumn({name: 'catId'})
+    cat: Cat;
 }
