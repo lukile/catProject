@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, Post, Param, Patch } from '@nestjs/common';
 import { CatsService } from '../service/cats.service';
 import { Cat } from '../entity/cat.entity';
+import {Owner} from '../entity/owner.entity';
+import {OwnerService} from '../service/owner.service';
 
 /*All methods call service methods according to request type*/
 
@@ -18,8 +20,8 @@ export class CatsController {
     }
 
     @Post()
-    async create(@Body() cat: Cat) {
-        const createdCat = await this.catsService.create(cat);
+    async create(@Body() cat: Cat, ownerService: OwnerService) {
+        const createdCat = await this.catsService.create(cat, ownerService);
         return { cat: createdCat }
     }
 

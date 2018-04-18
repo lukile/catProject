@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import {Cat} from './entity/cat.entity';
 import {Menu} from '../menu/menu';
-import {Catfood} from './entity/catfood.entity';
+import {catToy} from './entity/catToy.entity';
 import {Owner} from './entity/owner.entity';
 
 
@@ -45,10 +45,10 @@ createConnection().then(async connection => {
     const catsList = await connection.manager.find(Cat);
     console.log('Loaded cats: ', catsList);
 
-    //List catfood from db
-    console.log('Load catfood from db');
-    const catfoodList = await connection.manager.find(Catfood);
-    console.log('Loaded cats: ', catfoodList);
+    //List catToy from db
+    console.log('Load catToy from db');
+    const catToyList = await connection.manager.find(catToy);
+    console.log('Loaded cats: ', catToyList);
 
     //List owner from db
     console.log('Load owners from');
@@ -57,21 +57,21 @@ createConnection().then(async connection => {
 
     //Insert cat in db
     const cat = new Cat();
-    //Ask to user age, name, breed and after owner and catfood
+    //Ask to user age, name, breed and after owner and catToy
     cat.age= 'user input';
     cat.name = 'user input';
     cat.breed = 'user input';
     await connection.manager.save(cat);
     console.log('A new cat has been saved in db with id : ' + cat.id);
 
-    //Insert catfood in db
-    const catfood = new Catfood();
-    //Ask user price, type, brand and after which cat eat this catfood
-    catfood.price = 'user input';
-    catfood.type = 'user input';
-    catfood.brand = 'user input';
-    await connection.manager.save(catfood);
-    console.log('Catfood has been saved in db with id : ' + catfood.id);
+    //Insert catToy in db
+    const catToy = new catToy();
+    //Ask user price, type, brand and after which cat eat this catToy
+    catToy.price = 'user input';
+    catToy.type = 'user input';
+    catToy.brand = 'user input';
+    await connection.manager.save(catToy);
+    console.log('catToy has been saved in db with id : ' + catToy.id);
 
     //Insert owner in db
     const owner = new Owner();

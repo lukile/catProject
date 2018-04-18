@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn} from 'typeorm';
+import {Cat} from './cat.entity';
 
 @Entity()
 export class Owner {
@@ -13,4 +14,7 @@ export class Owner {
 
     @Column('int')
     age: number;
+
+    @OneToMany(type => Cat, cat => cat.owner)
+    cats: Cat[];
 }

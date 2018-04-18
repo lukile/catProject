@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 /*That's represent each table and column inserted on database */
 
 @Entity()
-export class Catfood {
+export class CatToy {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -15,7 +15,4 @@ export class Catfood {
 
     @Column()
     price: number;
-
-    @Column()
-    weight: string;
 }
