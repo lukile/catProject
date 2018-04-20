@@ -1,13 +1,7 @@
-import { NestFactory } from '@nestjs/core';
-import { ApplicationModule } from './src/app.module';
-import { Module } from '@nestjs/common';
-import * as express from 'express';
-require('ts-node/register');
-require('./server');
-import * as http from 'http';
+import {NestFactory} from '@nestjs/core';
+import {ApplicationModule} from './src/app.module';
 
-import {SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-
+import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 
 async function bootstrap() {
     const app = await NestFactory.create(ApplicationModule);
