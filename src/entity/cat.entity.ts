@@ -18,9 +18,6 @@ export class Cat {
     @Column('text')
     breed: string;
 
-    @Column({nullable: false})
-    ownerId: number;
-
     @ManyToOne(type => Owner)
     @JoinColumn({name: 'ownerId'})
     owner: Owner;

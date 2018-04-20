@@ -24,7 +24,6 @@ export class CatsService {
     async create(cat: Cat) {
         //Recuper l'ensemble des owner
         //affecter le owner.id au cat.owner
-
         return await this.catRepository.save(cat);
     }
 

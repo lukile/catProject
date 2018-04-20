@@ -20,9 +20,9 @@ export class CatsController {
     }
 
     @Post()
-    async create(@Body() cat: Cat, ownerService: OwnerService) {
-        const createdCat = await this.catsService.create(cat, ownerService);
-        return { cat: createdCat }
+    async create(@Body() cat: Cat) {
+        const createdCat = await this.catsService.create(cat);
+        return { cat: createdCat };
     }
 
     @Patch(':id')
