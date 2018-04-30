@@ -1,3 +1,4 @@
+/*
 import { createConnection } from 'typeorm';
 
 export const databaseProviders = [
@@ -12,8 +13,8 @@ export const databaseProviders = [
             synchronize: true,
             logging: false,
               entities: [
-                 'src/entity/**/*.ts',
+                 'src/entity/!**!/!*.ts',
             ],
         }),
     },
-];
+];*/

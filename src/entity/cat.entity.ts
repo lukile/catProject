@@ -18,7 +18,7 @@ export class Cat {
     @Column('text')
     breed: string;
 
-    @ManyToOne(type => Owner)
+    @ManyToOne(type => Owner, {nullable: false, onDelete: "CASCADE"})
     @JoinColumn({name: 'ownerId'})
     owner: Owner;
 

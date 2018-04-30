@@ -17,7 +17,7 @@ export class CatToy {
     @Column()
     price: number;
 
-    @ManyToOne(type => Cat)
+    @ManyToOne(type => Cat, {nullable: false, onDelete: "CASCADE"})
     @JoinColumn({name: 'catId'})
     cat: Cat;
 }
