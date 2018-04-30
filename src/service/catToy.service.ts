@@ -2,7 +2,6 @@ import {Component} from '@nestjs/common';
 import {Repository} from 'typeorm';
 import {CatToy} from '../entity/catToy.entity';
 import {InjectRepository} from '@nestjs/typeorm';
-import {Cat} from '../entity/cat.entity';
 
 @Component()
 export class CatToyService {

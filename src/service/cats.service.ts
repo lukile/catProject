@@ -1,10 +1,8 @@
 import {Component} from '@nestjs/common';
 import {getRepository, Repository} from 'typeorm';
 import {Cat} from '../entity/cat.entity';
-import {OwnerService} from './owner.service';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Owner} from '../entity/owner.entity';
-import {Connection} from 'typeorm';
 
 @Component()
 export class CatsService {
@@ -22,8 +20,7 @@ export class CatsService {
     }
 
     async create(cat: Cat) {
-        //Recuper l'ensemble des owner
-        //affecter le owner.id au cat.owner
+
         return await this.catRepository.save(cat);
     }
 

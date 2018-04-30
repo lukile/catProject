@@ -15,7 +15,6 @@ const http = require('http');
 const server: hapi.Server = new hapi.Server();
 
 async function bootstrap() {
-    console.log('YOUPI CONNARD');
     const app = await NestFactory.create(ApplicationModule, server);
     await app.init();
 

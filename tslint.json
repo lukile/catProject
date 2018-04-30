@@ -9,8 +9,7 @@
     "rules": {
         "eofline": false,
         "quotemark": [
-            true,
-            "single"
+            false
         ],
         "indent": false,
         "member-access": [
