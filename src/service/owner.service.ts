@@ -7,8 +7,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 export class OwnerService {
     constructor(
         @InjectRepository(Owner)
-        private readonly ownerRepository: Repository<Owner>
-    ) {}
+        private readonly ownerRepository: Repository<Owner>) {}
 
     async findAll(): Promise<Owner[]> {
         return await this.ownerRepository.find();
@@ -17,6 +16,11 @@ export class OwnerService {
     async findOne(id: number) {
         return await this.ownerRepository.findOneById(id);
     }
+
+    async findOneByEmail(mail: string): Promise<Owner> {
+        return await this.ownerRepository.findOne({mail});
+    }
+
     async create(owner: Owner) {
         return await this.ownerRepository.save(owner);
     }
