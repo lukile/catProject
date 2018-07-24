@@ -20,8 +20,12 @@ export class CatToyController {
 
     @Post()
     async create(@Body() catToy: CatToy) {
-        const createdcatToy = await this.catToyService.create(catToy);
-        return { catToy: createdcatToy };
+        if(catToy.cat){
+            const createdcatToy = await this.catToyService.create(catToy);
+            return { catToy: createdcatToy };
+        }else{
+            throw new Error('cat toy must have cat');
+        }
     }
 
     @Patch(':id')

@@ -7,8 +7,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 export class CatsService {
     constructor(
         @InjectRepository(Cat)
-        private readonly catRepository: Repository<Cat>
-    ) {}
+        private readonly catRepository: Repository<Cat>) {}
 
     async findAll(): Promise<Cat[]> {
             return await this.catRepository.find();
