@@ -9,6 +9,7 @@ export class AuthService {
     constructor(private readonly ownerService: OwnerService) {}
 
     async createToken(payload) {
+        //1 month in min
         const expiresIn = 60 * 730;
         const secretOrKey = 'secret';
         const token = jwt.sign(payload, secretOrKey, { expiresIn });
@@ -19,17 +20,14 @@ export class AuthService {
         };
     }
 
-    async validateOwner(signedOwner): Promise<boolean> {
-        const { mail, password } = signedOwner;
-        const owner = await this.ownerService.findOneByEmail(mail);
+    async validateToken(mail: string, token: string): Promise<boolean> {
+        const student = await this.ownerService.findOneByEmail(mail);
 
-        return await EncryptorService.validate(password, owner.password);
-        /*const owner = await this.ownerService.findOneByEmail(mail);
-
-        if (!owner)
+        if (!student)
             return Promise.resolve(false);
+
         return jwt.verify(token, 'secret', {}, (error, decodedToken) => {
-           return error ? Promise.resolve(false) : Promise.resolve(true);
-        });*/
+            return error ? Promise.resolve(false) : Promise.resolve(true);
+        });
     }
 }

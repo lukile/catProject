@@ -11,9 +11,6 @@ export class EncryptorService {
     }
 
     static async validate(password, hash): Promise<boolean> {
-        console.log('password : ' + password);
-        console.log('hash : ' + hash);
-
         return await bcrypt.compare(password, hash);
     }
 }

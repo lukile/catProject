@@ -5,12 +5,14 @@ import {OwnerModule} from './module/owner.module';
 import {CatToyModule} from './module/catToy.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {AuthModule} from './authentication/auth.module';
+import {PostOwnerModule} from './module/postOwner.module';
 
 @Module({
     imports: [
         CatsModule,
         CatToyModule,
         OwnerModule,
+        PostOwnerModule,
         AuthModule,
 
         TypeOrmModule.forRoot({

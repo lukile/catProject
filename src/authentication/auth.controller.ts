@@ -14,6 +14,8 @@ export class AuthController {
     @Post()
     public async authOwner(@Body() ownerRequest: Owner) {
         const { mail, password } = ownerRequest;
+        console.log('password : ' + password);
+        console.log('mail : ' + mail);
         const owner = await this.ownerService.findOneByEmail(mail);
 
         if(owner) {
@@ -23,6 +25,7 @@ export class AuthController {
                     id: owner.id,
                     firstname: owner.firstname,
                     lastname: owner.lastname,
+                    mail: owner.mail,
                 };
                 return await this.authService.createToken(tokenPayload);
             }

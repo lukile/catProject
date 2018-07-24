@@ -1,6 +1,7 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, Put} from '@nestjs/common';
 import {CatsService} from '../service/cats.service';
 import {Cat} from '../entity/cat.entity';
+import {OwnerService} from '../service/owner.service';
 
 /*All methods call service methods according to request type*/
 
@@ -19,11 +20,15 @@ export class CatsController {
 
     @Post()
     async create(@Body() cat: Cat) {
-        const createdCat = await this.catsService.create(cat);
-        return { cat: createdCat };
+        if (cat.owner){
+            const createdCat = await this.catsService.create(cat);
+            return { cat: createdCat };
+        }else{
+            throw new Error('cat must have an owner');
+        }
     }
 
-    @Patch(':id')
+    @Put(':id')
     async update(@Param('id') id: string, @Body() cat: Partial<Cat>) {
         return await this.catsService.update(+id, cat);
     }

@@ -10,7 +10,7 @@ export class JwtStrategy extends Strategy {
         super(
             {
                 jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-                passRequestToCallback: true,
+                passReqToCallback: true,
                 secretOrKey: 'secret',
             },
             async (req, payload, next) => await this.verify(req, payload, next),
@@ -19,10 +19,14 @@ export class JwtStrategy extends Strategy {
     }
 
     async verify(req, payload, done) {
-       const isValid = await this.authService.validateOwner(payload);
+        const jwtToken = req.headers['authorization'];
+        if(!jwtToken)
+            return done('Unauthorized', false);
+        const plainToken = jwtToken.split(' ')[1];
+        const isValidToken = await this.authService.validateToken(payload.mail, plainToken);
 
-       if(!isValid)
-           return done('Unauthorized', false);
-       done(null, payload);
+        if(!isValidToken)
+            return done('Unauthorized', false);
+        return done(null, payload);
     }
 }
